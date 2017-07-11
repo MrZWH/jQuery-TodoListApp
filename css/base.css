@@ -81,6 +81,7 @@ button {
     margin-right: 1%;
 }
 
+button.primary,
 [type=submit] {
     background: #46b1e4;
 }
@@ -107,6 +108,24 @@ button {
     cursor: pointer;
 }
 
+.task-item.completed {
+    color: #aaa;
+    /*background: rgba(255, 255, 255, .7);*/
+    opacity: 0.4;
+}
+
+.task-item.completed::after {
+    content: " ";
+    height: 1px;
+    background: #aaa;
+    width: 96%;
+    position: relative;
+    top: -8px;
+    display: block;
+    float: right;
+
+}
+
 .task-item:hover {
     background: #ddd;
 }
@@ -124,6 +143,7 @@ button {
     background: #fff;
     bottom: 0;
     right: 0;
+    overflow: auto;
     border-radius: 3px 0 0 3px;
     box-shadow: 0 1px 2px 1px rgba(0, 0, 0, .1) 
 }
@@ -158,4 +178,21 @@ button {
 
 .action:hover {
     color: #333;
+}
+
+.msg {
+    display: none;
+    text-align: center;
+    background: #ffe264;
+    padding: 10px;
+    color: #333;
+}
+
+.anchor {
+    cursor: pointer;
+}
+
+.alerter {
+    width: 0;
+    height: 0;
 }
