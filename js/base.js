@@ -310,7 +310,7 @@
                     continue;
                 current_timestamp = (new Date()).getTime();
                 task_timestamp = (new Date(item.remind_date)).getTime();
-                if (current_timestamp - task_timestamp >= 1) {
+                if ((current_timestamp - task_timestamp) >= 1) {
                     update_task(i, {
                         informed: true
                     });
