@@ -4,7 +4,7 @@
     var $form_add_task = $('.add-task')
         , $task_delete_trigger
         , $task_detail_trigger
-        , $task_detail = $('.task-datail')
+        , $task_detail = $('.task-detail')
         , $task_detail_mask = $('.task-detail-mask')
         , task_list = []
         , current_index
@@ -31,32 +31,42 @@
     }
 
     function listen_task_detail() {
+        var index;
+        $('.task-item').on('dblclick', function() {
+            index = $(this).data('index')
+            show_task_detail(index);
+        })
+
         $task_detail_trigger.on('click', function () {
             var $this = $(this);
             var $item = $this.parent().parent();
-            var index = $item.data('index');
+            index = $item.data('index');
             show_task_detail(index);
         })
     };
 
     // 查看task详情
     function show_task_detail(index) {
+        // 生成详情模板
         render_task_detail(index);
         current_index = index;
-        $task_datail_mask.show();
-        $task_datail.show();
+        // 显示详情模板
+        $task_detail_mask.show();
+        // 显示详情模板mask
+        $task_detail.show();
     };
 
+    // 更新task
     function update_task(index, data) {
         if (index === undefined || !task_list[index])
             return;
         task_list[index] = data;
         refresh_task_list();
     }
-
+    // 隐藏task详情
     function hide_task_detail() {
-        $task_datail_mask.hide();
-        $task_datail.hide();
+        $task_detail_mask.hide();
+        $task_detail.hide();
     }
 
     // 渲染指定task详细信息
@@ -68,16 +78,18 @@
             '<div class="content">' +
             item.content +
             '</div>' +
-            '<div><input type="text" name="content" value="' + item.content + '" style="display:none"></div>' +
+            '<div class="input-item">' +
+            '<input type="text" name="content" value="' + (item.content || '') + '" style="display:none">' +
+            '</div>' +
             '<div>' +
-            '<div class="desc">' +
-            '<textarea name="desc">' + item.desc + '</textarea>' +
+            '<div class="desc input-item">' +
+            '<textarea name="desc">' + (item.desc || '') + '</textarea>' +
             '</div>' +
             '</div>' +
-            '<div class="remind">' +
+            '<div class="remind input-item">' +
             '<input name="remind_date" type="date" value="' + item.remind_date + '">' +
             '</div>' +
-            '<div><button type="submit">更新</button></div>' +
+            '<div class="input-item"><button type="submit">更新</button></div>' +
             '</form>';
         $task_detail.html(tpl);
         $update_form = $task_detail.find('form');
@@ -126,7 +138,7 @@
     function delete_task(index) {
         if (index == undefined || !task_list[index]) return;
 
-        delete task_list[idex];
+        delete task_list[index];
         refresh_task_list();
     }
 
@@ -143,7 +155,7 @@
         $task_list.html('');
         for (var i = 0; i < task_list.length; i++) {
             var $task = render_task_item(task_list[i], i);
-            $task_list.append($task);
+            $task_list.prepend($task);
         }
 
         $task_delete_trigger = $('.action.delete');
