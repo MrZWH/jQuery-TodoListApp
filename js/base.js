@@ -230,7 +230,7 @@
             '</div>' +
             '<div class="remind input-item">' +
             '<label>提醒时间</label>' +
-            '<input class="datetime" name="remind_date" type="text" value="' + (item.remind_date || '') + '">' +
+            '<input class="datetime" autocomplete="off" name="remind_date" type="text" value="' + (item.remind_date || '') + '">' +
             '</div>' +
             '<div class="input-item"><button type="submit">更新</button></div>' +
             '</form>';
