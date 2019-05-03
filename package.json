@@ -1,7 +1,7 @@
 {
   "name": "jquery-todoapp",
   "dependencies": {
-    "jquery": "^3.2.1",
+    "jquery": "^3.4.0",
     "jquery-datetimepicker": "^2.5.4",
     "normalize.css": "^7.0.0",
     "store": "^2.0.12"
